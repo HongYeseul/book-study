@@ -72,3 +72,90 @@ inventory.sort(comparing(Apple::getWeight));
 
 언어는 하드웨어나 프로그래머 기대의 변화에 부응하는 방향으로 변화해야 한다.
 
+이제 자바 8에 추가된 새로운 개념을 하나씩 자세히 살펴보자.
+
+## 1.3 자바 함수
+
+자바 프로그램에서 조작할 수 있는 것 중에 함수가 추가 되었다. 왜 함수가 필요할까?
+
+프로그래밍 언어의 핵심은 값을 바꾸는 것이다. 이 값은 일급 객체(first-class)라고 부른다. 자바 프로그래밍 언어의 다양한 구조체(메서드, 클래스 같은)가 값의 구조를 표현하는 데 도움이 될 수 있다. 하지만 프로그램을 실행하는 동안 이러한 모든 구조체를 자유롭게 전달할 수는 없다. 이렇게 전달할 수 없는 구조체는 이급 객체(또는 시민-citizens)이다. 
+
+런타임에 메서드를 전달할 수 있다면,(메서드를 일급 객체로 만들면) 프로그래밍에 유용하게 활용할 수 있다. 따라서 자바 8 설계자들은 이급 객체를 일급 객체로 바꿀 수 있는 기능을 추가했다.
+
+### 1.3.1 메서드와 람다를 일급 시민으로
+
+첫 번째로 메서드 참조라는 새로운 자바 8의 기능을 소개한다. 디렉터리에서 모든 숨겨진 파일을 필터링한다고 가정하자. 
+``` java
+File[] hiddenFiles = new File(".").listFiles(new FileFilter() {
+    public boolean accept(File file) {
+        return file.isHidden(); // 숨겨진 파일 필터링
+    }
+})
+```
+
+자바 8을 사용하면 다음과 같이 수정할 수 있다.
+
+``` java
+File[] hiddenFiles = new File(".").listFiles(File::isHidden);
+```
+
+자바 8의 메서드 참조(::)를 이용해서 listFiles에 직접 전달할 수 있다. 
+
+**람다 : 익명함수**
+
+직접 메서드를 정의할 수도 있지만, 이용할 수 있는 편리한 클래스나 메서드가 없을 때 람다 문법을 이용하면 더 간결하게 코드를 구현할 수 있다. 예를 들어 ```(int x) -> x + 1```과 같이 사용할 수 있다.
+
+### 1.3.2 코드 넘겨주기 : 예제
+
+``` java
+public static boolean isGreenApple(Apple apple) {
+    return GREEN.equals(apple.getColor());
+}
+
+public static boolean isHeavyApple(Apple apple) {
+    return apple.getWeight() > 150;
+}
+
+public interface Predicate<T> {
+    boolean test(T t);
+}
+
+static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p) {
+    List<Apple> result = new ArrayList<>();
+    for (Apple apple: inventory) {
+        if (p.test(apple) {
+            result.add(apple);
+        })
+    }
+    return result;
+}
+```
+
+다음과 같이 사용할 수 있다.
+
+``` java
+filterApples(inventory, Apple::isGreenApple);
+filterApples(inventory, Apple::isHeavyApple);
+```
+
+### 1.3.3. 메서드 전달에서 람다로
+
+메서드를 값으로 전달하는 것은 분명 유용하다. 하지만 한 번만 사용할 메서드를 매번 정의하는 것은 귀찮은 일이다. 자바 8에서는 익명 함수 또는 람다라는 새로운 개념을 이용해 코드를 구현할 수 있다.
+``` java
+filterApples(inventory, (Apple a) -> GREEN.equals(a.getColor()));
+filterApples(inventory, (Apple a) -> a.getWeight() > 150);
+```
+
+이 때는 filter와 같은 라이브러리가 있었다.
+
+``` java
+static <T> Collection<T> filter(Collection<T> c, Predicate<T> p);
+```
+
+filter를 사용하면 다음과 같이 개선할 수 있다.
+``` java
+filter(inventory, (Apple a) -> a.getWeight() > 150);
+```
+
+하지만 병렬성이라는 중요성 때문에 설계자들은 이와 같은 설계를 포기하고 자바 8에서 filter와 비슷한 새로운 스트림 API를 제공한다. 또한 컬렉션과 스트림 간에 변환할 수 있는 메서드(map, reduce 등)도 제공한다.
+
