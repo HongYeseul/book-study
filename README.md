@@ -66,6 +66,31 @@
     </tr>
 </table>
 
+### Infrastructure
+<table>
+    <tr>
+        <th scope="col"></td>
+        <th scope="col">표지</td>
+        <th scope="col">제목</td>
+        <th scope="col">기간</td>
+    </tr>
+    <!-- 도커 교과서 -->
+    <tr>
+        <td>1</td>
+        <td>
+            <a href="">
+                <img src="https://image.yes24.com/goods/111408749" width="100"/>
+            </a>
+        </td>
+            <td>
+                <a href="./도커-교과서/">
+                도커 교과서
+                </a>
+            </td>
+        <td>진행중</td>
+    </tr>
+</table>
+
 ### CS
 <table>
     <tr>
@@ -74,9 +99,24 @@
         <th scope="col">제목</td>
         <th scope="col">기간</td>
     </tr>
-    <!-- 면접을 위한 CS 전공지식 노트 -->
+    <!-- 그림으로 이해하는 네트워크 구조와 기술 -->
     <tr>
         <td>1</td>
+        <td>
+            <a href="">
+                <img src="https://image.yes24.com/goods/120241473" width="100"/>
+            </a>
+        </td>
+            <td>
+                <a href="./그림으로-이해하는-네트워크-구조와-기술/">
+                그림으로 이해하는 네트워크 구조와 기술
+                </a>
+            </td>
+        <td>24.06.</td>
+    </tr>
+    <!-- 면접을 위한 CS 전공지식 노트 -->
+    <tr>
+        <td>2</td>
         <td>
             <a href="">
                 <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165219529.jpg" width="100"/>
