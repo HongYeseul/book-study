@@ -79,7 +79,7 @@
         <td>1</td>
         <td>
             <a href="">
-                <img src="https://image.yes24.com/goods/111408749" width="100"/>
+                <img src="https://image.yes24.com/goods/111408749/XL" width="100"/>
             </a>
         </td>
             <td>
@@ -104,7 +104,7 @@
         <td>1</td>
         <td>
             <a href="">
-                <img src="https://image.yes24.com/goods/120241473" width="100"/>
+                <img src="https://image.yes24.com/goods/120241473/XL" width="100"/>
             </a>
         </td>
             <td>
